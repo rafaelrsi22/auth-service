@@ -1,0 +1,10 @@
+CREATE TABLE users
+(
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    username VARCHAR(64) NOT NULL,
+    password TEXT NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT NOW(),
+    updated_at DATETIME DEFAULT NOW() ON UPDATE NOW(),
+    CONSTRAINT users_pk PRIMARY KEY (id)
+);
