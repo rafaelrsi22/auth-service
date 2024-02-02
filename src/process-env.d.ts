@@ -8,6 +8,7 @@ declare global : {
             DB_PASSWORD: string;
             DB_NAME: string;
             AUTH_SECRET: string;
+            AUTH_COOKIE_NAME: string;
         }
     }
 }

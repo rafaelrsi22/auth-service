@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, Optional } from "sequelize";
-import dataBase from "../db";
+
+const dataBase = require('../db');
 
 type UserAttributes = {
     id: number,
@@ -12,6 +13,8 @@ type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
 class User extends Model<UserAttributes, UserCreationAttributes> {
     declare id: number;
+    declare email: string;
+    declare username: string;
 }
 
 User.init({

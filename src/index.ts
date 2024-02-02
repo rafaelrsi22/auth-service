@@ -2,15 +2,15 @@ import express, {Router} from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
-import dataBase from './db';
-
 dotenv.config();
 
+const dataBase = require('./db');
 const authRoute: Router = require('./routes/authRoute');
 
 const app = express();
 
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.use(cookieParser());
 app.use('/auth', authRoute);
 
