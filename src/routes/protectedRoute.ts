@@ -17,9 +17,14 @@ async function authorizedRoute(req: Request, res: Response, next: NextFunction) 
 
     try {
         const userId = verifyTokenAuthenticity(authorizationToken!).id;
+        const user = await User.findByPk(userId);
+
+        if (!user?.authorized) {
+            res.status(401).json({message: 'Unauthorized'})    
+        }
 
         req.userId = userId;
-        req.user = await User.findByPk(userId);
+        req.user = user;
 
         next();
     } catch(err) {

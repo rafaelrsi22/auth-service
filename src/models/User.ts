@@ -6,7 +6,8 @@ type UserAttributes = {
     id: number,
     username: string,
     password: string,
-    email: string
+    email: string,
+    authorized: boolean;
 }
 
 type UserCreationAttributes = Optional<UserAttributes, 'id'>;
@@ -15,6 +16,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> {
     declare id: number;
     declare email: string;
     declare username: string;
+    declare authorized: boolean;
 }
 
 User.init({
@@ -37,6 +39,10 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
+    },
+    authorized: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     sequelize: dataBase,

@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import express, {NextFunction, Request, Response, Router} from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
@@ -12,6 +12,7 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
+
 app.use('/auth', authRoute);
 
 app.listen(process.env.PORT, async () => {

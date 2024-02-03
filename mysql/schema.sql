@@ -4,7 +4,8 @@ CREATE TABLE users
     username VARCHAR(64) NOT NULL,
     password TEXT NOT NULL,
     email VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT NOW(),
-    updated_at DATETIME DEFAULT NOW() ON UPDATE NOW(),
+    authorized BOOLEAN DEFAULT FALSE,
+    createdAt DATETIME DEFAULT NOW(),
+    updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     CONSTRAINT users_pk PRIMARY KEY (id)
 );

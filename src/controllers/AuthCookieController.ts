@@ -1,3 +1,7 @@
+/*
+    TODO: Refactor AuthCookieController into a Service (Controllers should be only for routes methods);
+*/
+
 import { Request, Response } from "express";
 import { genSaltSync, hashSync } from "bcrypt-ts"
 import jwt from "jsonwebtoken";
