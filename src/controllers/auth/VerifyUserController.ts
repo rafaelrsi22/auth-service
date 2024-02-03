@@ -18,7 +18,6 @@ class VerifyUserController extends BaseController {
 
         if (authorizationToken) {
             const decodedVerifyToken = <VerifyToken>jwt.verify(authorizationToken, process.env.AUTH_SECRET);
-            console.log(decodedVerifyToken);
             await User.update({authorized: true}, {where: {id: decodedVerifyToken.id}});
 
             res.sendStatus(200);

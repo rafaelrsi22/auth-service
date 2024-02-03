@@ -17,8 +17,8 @@ class CreateUserController extends BaseController {
         const {email, username, password} = req.body;
 
         try {
-            const newUser = await User.create({email, username, password: hashPassword(password), authorized: false});
-            const verifyToken = this.generateVerificationToken(newUser.id);
+            const user = await this.createUser(email, username, password);
+            const verifyToken = this.generateVerificationToken(user.id);
 
             this.sendVerificationEmail(email, verifyToken);
 
@@ -26,6 +26,10 @@ class CreateUserController extends BaseController {
         } catch(err) {
             BaseController.jsonResponse(res, 500, 'User or email already exists');
         }
+    }
+
+    private createUser(email: string, username: string, password: string) : Promise<User> {
+        return User.create({email, username, password: hashPassword(password), authorized: false});
     }
 
     public sendVerificationEmail(destinatary: string, token: string) {

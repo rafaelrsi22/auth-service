@@ -11,21 +11,13 @@ import { BaseController } from "../BaseController";
 import User from "../../models/User";
 import { AuthenticadedCookie } from "../AuthCookieController";
 
-async function findUser(loginIdentifier: string) : Promise<User | null>  {
-    return (
-        await User.findOne({where: {email: loginIdentifier}})
-        ||
-        await User.findOne({where: {username: loginIdentifier}})
-    );
-}
-
 class LoginUserController extends BaseController {
     protected async executeImplement(req: Request, res: Response) {
-        const loginIdentifier = <string>req.query.loginIdentifier;
+        const username = <string>req.query.username;
         const password = <string>req.query.password;
 
         try {
-            const user = await findUser(loginIdentifier);
+            const user = await this.findUserByEmailOrUsername(username);
 
             if (!user) {
                 this.clientError(res);
@@ -46,6 +38,14 @@ class LoginUserController extends BaseController {
         } catch(err) {
             this.clientError(res);
         }
+    }
+
+    private async findUserByEmailOrUsername(username: string) : Promise<User | null> {
+        return (
+            await User.findOne({where: {email: username}})
+            ||
+            await User.findOne({where: {username}})
+        );
     }
 }
 
