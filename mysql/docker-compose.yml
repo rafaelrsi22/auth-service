@@ -9,11 +9,11 @@ services:
       - --innodb_force_recovery=0
       - --default_time_zone=America/Sao_Paulo
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=authservice
+      - MYSQL_ROOT_PASSWORD={YOUR PASSWORD}
+      - MYSQL_DATABASE={YOUR DATABASE NAME}
       - MYSQL_TCP_PORT=3306
     volumes:
-      - C:\Users\Rafael\Documents\Projects\auth-service\mysql\db:/var/lib/mysql
+      
     ports:
       - 3307:3306
     expose:
