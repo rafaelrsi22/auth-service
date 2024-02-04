@@ -1,5 +1,6 @@
 import express, {NextFunction, Request, Response, Router} from 'express';
 import cookieParser from 'cookie-parser';
+import methodOverride from 'method-override';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
+app.use(methodOverride("_method"));
 
 app.use('/auth', authRoute);
 
